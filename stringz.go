@@ -5,11 +5,11 @@
 //
 // This file is a high level interface to these algorithms.  This should be
 // sufficient for most applications, but if necessary the underlying
-// algorithms are exposed in github.com/runningwild/stringz/core.
+// algorithms are exposed in github.com/MobRulesGames/stringz/core.
 package stringz
 
 import (
-  "github.com/runningwild/stringz/core"
+  "github.com/MobRulesGames/stringz/core"
   "io"
 )
 

@@ -5,7 +5,7 @@ import (
   "bytes"
   . "github.com/orfjackal/gospec/src/gospec"
   "github.com/orfjackal/gospec/src/gospec"
-  "github.com/runningwild/stringz/core"
+  "github.com/MobRulesGames/stringz/core"
   "testing"
 )
 

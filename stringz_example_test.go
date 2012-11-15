@@ -2,7 +2,7 @@ package stringz_test
 
 import (
   "fmt"
-  "github.com/runningwild/stringz"
+  "github.com/MobRulesGames/stringz"
 )
 
 func ExampleStringFinder() {
