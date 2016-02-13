@@ -9,8 +9,9 @@
 package stringz
 
 import (
-  "github.com/MobRulesGames/stringz/core"
-  "io"
+	"io"
+
+	"github.com/MobRulesGames/stringz/core"
 )
 
 // This was just an experiment, probably shouldn't publish it yet
@@ -32,7 +33,7 @@ import (
 // }
 
 type StringFinder struct {
-  bmd core.BmData
+	bmd core.BmData
 }
 
 // Preprocesses p and returns a *StringFinder that can be used to quickly
@@ -41,7 +42,7 @@ type StringFinder struct {
 // Methods on StringFinder can be called concurrently from multiple
 // go-routines.
 func Find(p []byte) *StringFinder {
-  return &StringFinder{bmd: core.BoyerMoorePreprocess(p)}
+	return &StringFinder{bmd: core.BoyerMoorePreprocess(p)}
 }
 
 // Searches t for the pattern, p, that was used to create the StringFinder.
@@ -51,20 +52,20 @@ func Find(p []byte) *StringFinder {
 // respectively.  The search requires O(k) space, where k is the number of
 // times p occurs in t.
 func (sf *StringFinder) In(t []byte) []int {
-  var res []int
-  core.BoyerMoore(sf.bmd, t, &res)
-  return res
+	var res []int
+	core.BoyerMoore(sf.bmd, t, &res)
+	return res
 }
 
 // Like In(), but searches the data from a Reader instead of a []byte.
 func (sf *StringFinder) InReader(r io.Reader) []int {
-  var res []int
-  core.BoyerMooreFromReader(sf.bmd, r, make([]byte, 100000), &res)
-  return res
+	var res []int
+	core.BoyerMooreFromReader(sf.bmd, r, make([]byte, 100000), &res)
+	return res
 }
 
 type StringSetFinder struct {
-  acd core.AcData
+	acd core.AcData
 }
 
 // Preprocesses ps and returns a *StringSetFinder that can be used to quickly
@@ -74,7 +75,7 @@ type StringSetFinder struct {
 // Methods on StringSetFinder can be called concurrently from multiple
 // go-routines.
 func FindSet(ps [][]byte) *StringSetFinder {
-  return &StringSetFinder{acd: core.AhoCorasickPreprocess(ps)}
+	return &StringSetFinder{acd: core.AhoCorasickPreprocess(ps)}
 }
 
 // Searches t for all patterns in the set of patterns, ps, that was used to
@@ -84,10 +85,10 @@ func FindSet(ps [][]byte) *StringSetFinder {
 // the length of t, and k is the total number of occurrences of all elements
 // of ps in t.
 func (ssf *StringSetFinder) In(t []byte) map[int][]int {
-  return core.AhoCorasick(ssf.acd, t)
+	return core.AhoCorasick(ssf.acd, t)
 }
 
 // Like In(), but searches the data from a Reader instead of a []byte.
 func (sf *StringSetFinder) InReader(input io.Reader) map[int][]int {
-  return core.AhoCorasickFromReader(sf.acd, input, 100000)
+	return core.AhoCorasickFromReader(sf.acd, input, 100000)
 }
